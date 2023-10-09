@@ -67,6 +67,9 @@ window.onload=function(){
 
     requestAnimationFrame(update);
     document.addEventListener("keydown",movePonyo);
+
+    board.addEventListener('touchstart',handleTouchStart,false);
+    board.addEventListener('touchend',handleTouchEnd,false);
 } 
 
 function update(){
@@ -222,4 +225,29 @@ function updateScore(){
         maxScore -= points;
     }
 }
+
+function handleTouchStart(event){
+   if(event.touches.length === 1){
+    touchStartX = event.touches[0].pageX;
+   }
+}
+
+function handleTouchEnd(event){
+  if(event.changedTouches.length === 1){
+    let touchEndX = event.changedTouches[0].pageX;
+    let touchDiff = touchEndX - touchStartX;
+
+    if(touchDiff > 0){
+      //Swipe right
+      velocity = 4;
+      ponyo.img = ponyoRightImg;
+    }else if(touchDiff < 0){
+      //swipe left
+      velocityX = -4;
+      ponyo.img = ponyoLeftImg;
+    }
+  }
+  event.preventDefault();
+}
+
 
