@@ -239,7 +239,7 @@ function handleTouchEnd(event){
 
     if(touchDiff > 0){
       //Swipe right
-      velocity = 4;
+      velocityX = 4;
       ponyo.img = ponyoRightImg;
     }else if(touchDiff < 0){
       //swipe left
